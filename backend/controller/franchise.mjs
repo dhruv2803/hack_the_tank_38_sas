@@ -17,4 +17,6 @@ router.put("/franchise/",async(req,res)=>{
     // update franchise information
 });
 
+
+
 export default router;
