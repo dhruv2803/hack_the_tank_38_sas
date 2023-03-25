@@ -11,8 +11,18 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSelector, useDispatch } from 'react-redux'
+import { setClientData } from '../store/clientStore'
+import { useState } from 'react';
 
 const ClientRegistration = () => {
+    const dispatch = useDispatch()
+    const [name, setName] = useState("");
+
+    const onSubmit = () => {
+        console.log(name);
+        dispatch(setClientData({name}));
+    }
     return (
         <>
       <Container component="main" maxWidth="xs">
@@ -31,7 +41,7 @@ const ClientRegistration = () => {
             Sign in
           </Typography>
           <Box component="form"  noValidate sx={{ mt: 1 }}>
-          <TextField fullWidth id="name" label="Full Name" variant="standard" />
+          <TextField fullWidth id="name" label="Full Name" variant="standard" onChange={(e)=>setName(e.target.value)} />
                     <TextField fullWidth  id="contactno" label="Contact Number" variant="standard" />
                     <TextField fullWidth  id="email" label="Email ID" variant="standard" />
                     <FormLabel id="permanentmaid">Full Time Maid</FormLabel>
@@ -49,10 +59,10 @@ const ClientRegistration = () => {
                     </RadioGroup>
                     <TextField fullWidth id="gender" label="Gender" variant="standard" />
                     <Button
-                    type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
+                    onClick = {()=>onSubmit()}
                     >
                     Client Registration
                     </Button>
