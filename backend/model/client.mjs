@@ -1,4 +1,5 @@
 import connection from '../dbConnection.mjs';
+import { v4 } from 'uuid';
 
 const Client={}
 
@@ -13,9 +14,10 @@ Client.getAllClients = () =>{
   });
 };
 
-Client.addClient = (client) =>{
+Client.addClient = (client) => {
+  const client_id = v4()
   return new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO client (id, phone, email) VALUES (?, ?, ?)`, [client.id,client.phone,client.email], (err, results, fields) => {
+    connection.query(`INSERT INTO client (id, phone, email) VALUES (?, ?, ?)`, [client_id,client.phone,client.email], (err, results, fields) => {
       if (err) {
         reject(err);
       } else {

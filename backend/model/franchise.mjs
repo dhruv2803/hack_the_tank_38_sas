@@ -1,4 +1,5 @@
 import connection from '../dbConnection.mjs';
+import { v4 } from 'uuid';
 
 const Franchise={}
 
@@ -14,8 +15,9 @@ Franchise.getAllFranchises = () =>{
 };
 
 Franchise.addFranchise = (Franchise) =>{
+  const franchise_id = v4()
   return new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO Franchise (id, phone, email) VALUES (?, ?, ?)`, [Franchise.id,Franchise.phone,Franchise.email], (err, results, fields) => {
+    connection.query(`INSERT INTO Franchise (id, phone, email) VALUES (?, ?, ?)`, [franchise_id,Franchise.phone,Franchise.email], (err, results, fields) => {
       if (err) {
         reject(err);
       } else {
